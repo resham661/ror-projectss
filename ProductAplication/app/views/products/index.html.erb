@@ -1,0 +1,26 @@
+<h1> Welcome to Product Application</h2>
+
+<p>
+  <%= link_to "Create a Product", new_product_path %>
+</p>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Price<th>
+    <th>Brand Name<th>
+  </tr>
+
+  <% @products.each do |p| %>
+    <tr>
+      <td><%= p.name %></td>
+      <td><%= p.price %></td>
+      <%
+=begin%>
+ <% debugger %> 
+<%
+=end%>
+      <td><%= p.brand.brand_name %></td>
+    </tr>
+  <% end %>
+</table>

@@ -1,0 +1,43 @@
+<%
+=begin%>
+ <%= simple_form_for @product do |f| %>
+  <%= f.input :name, label: "Product Name" %>
+  <%= f.input :price, label: "Price" %>
+  <%= f.button :submit %>
+<% end %>  
+<%
+=end%>
+
+<% if @product.errors.any? %>
+  <h2>The following errors prevented the todo from being saved</h2>
+  <ul>
+    <% @product.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>  
+  </ul>
+<% end %>
+
+<%= form_for @product do |f| %>
+  <p>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+   <%= f.label :price %>
+   <%= f.text_field :price %> 
+  </p>
+
+    <%= f.fields_for :brand do |brand_attribute| %>
+      <p>
+        <%= brand_attribute.label :brand_name, "Brand name" %>
+        <%= brand_attribute.text_field :brand_name %>
+      </p>
+    <% end %>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+
+
+<%= link_to "Back to product list", products_path %>

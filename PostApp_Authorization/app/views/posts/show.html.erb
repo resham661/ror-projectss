@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @post %>
+
+<div>
+  <% if can? :update, @post %><%= link_to "Edit", edit_post_path(@post) %><% end %>
+  <%= link_to "Back", posts_path %>
+
+  <% if can? :destroy, @post %><%= button_to "Destroy this post", @post, method: :delete %><% end %>
+</div>

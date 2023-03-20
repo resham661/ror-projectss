@@ -1,0 +1,33 @@
+<h2><%= @book.title %></h2>
+<h3><%= @book.author %></h3>
+<h4>Category: <%= @book.category.name %></h4>
+<p><%= @book.description %></p>
+
+<br>
+<% if user_signed_in? %>
+  <p>
+    <strong>Comments:</strong> 
+    
+    <div id="update_form">
+      <%= turbo_frame_tag "form1" do %>
+        <button class="button button1"><%= link_to "Add comments", new_book_comment_path(@book) %></button>
+      <% end %> 
+    </div> 
+    <br>
+    <div id="new_comment">
+      <%= render @book.comments.order(id: :desc) %>
+    </div>
+  </p>
+
+  <%= link_to "Back", root_path %>
+
+  <% if @book.user_id == current_user.id %>
+    
+    <%= link_to "Edit", edit_book_path(@book) %>
+    <%= link_to "Delete", book_path(@book), data: {
+      turbo_method: :delete,
+      turbo_confirm: "Are you sure?"
+    } %>
+  <% end %>
+  
+<% end %>

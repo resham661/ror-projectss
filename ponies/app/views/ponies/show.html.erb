@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @pony %>
+
+<div>
+  <%= link_to "Edit this pony", edit_pony_path(@pony) %> |
+  <%= link_to "Back to ponies", ponies_path %>
+
+  <%= button_to "Destroy this pony", @pony, method: :delete, data: { confirm: 'Are you sure?' }, :remote => true, :class => 'delete_pony' %>
+</div>

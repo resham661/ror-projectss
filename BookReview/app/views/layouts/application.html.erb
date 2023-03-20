@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BookReview</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-default">
+
+      <div class="container">
+
+        <div class="navbar-header">
+          <%= link_to "Book Review", root_path, class: "navbar-brand" %>
+        </div>
+
+        <ul class="nav navbar-nav">
+          <li><%= link_to "Sign Up",  new_user_registration_path %></li>
+
+          <% if user_signed_in? %>
+            <li><%= link_to "Sign Out", destroy_user_session_path, data:{ turbo_method: :delete } %></li>
+          <% else %>
+            <li><%= link_to "Log In", new_user_session_path %></li> 
+          <% end %>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+
+          <li class="nav-item">
+            <% Category.all.each do |category| %>
+                    <li>
+                      <%= link_to category.name, books_path(category: category.name), class:"link" %>
+                    </li>
+                  <% end %>
+          </li>
+          
+          
+          <% if user_signed_in? %>
+            <li><%= link_to "Add Book", new_book_path %>
+          <% end %>
+        </ul>
+
+      </div>
+
+    </nav>
+    
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+
+    <%= yield %>
+  </body>
+</html>
